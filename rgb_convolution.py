@@ -55,7 +55,7 @@ def normalize(feature_map):
 
 
 def main():
-    input_path = "input.jpg"
+    input_path = "sample rcb image.png"
     output_dir = "results"
 
     os.makedirs(output_dir, exist_ok=True)
@@ -77,9 +77,9 @@ def main():
     ])
 
     # Apply convolution separately
-    red_feature = convolution2d(red, kernel)
-    green_feature = convolution2d(green, kernel)
-    blue_feature = convolution2d(blue, kernel)
+    red_feature = np.abs(convolution2d(red, kernel))
+    green_feature = np.abs(convolution2d(green, kernel))
+    blue_feature = np.abs(convolution2d(blue, kernel))
 
     # Normalize individual feature maps
     red_feature = normalize(red_feature)
