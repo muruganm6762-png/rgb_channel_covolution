@@ -92,16 +92,29 @@ def main():
         axis=2
     )
 
-    # Save results
-    Image.fromarray(red_feature).save(
+    # Get height and width for creating 3-channel colored arrays
+    height, width = red_feature.shape
+
+    # Create true-color versions for individual channels
+    red_colored = np.zeros((height, width, 3), dtype=np.uint8)
+    red_colored[:, :, 0] = red_feature  # Put values only in Red channel
+
+    green_colored = np.zeros((height, width, 3), dtype=np.uint8)
+    green_colored[:, :, 1] = green_feature  # Put values only in Green channel
+
+    blue_colored = np.zeros((height, width, 3), dtype=np.uint8)
+    blue_colored[:, :, 2] = blue_feature  # Put values only in Blue channel
+
+    # Save results with actual colors
+    Image.fromarray(red_colored).save(
         f"{output_dir}/red_feature_map.png"
     )
 
-    Image.fromarray(green_feature).save(
+    Image.fromarray(green_colored).save(
         f"{output_dir}/green_feature_map.png"
     )
 
-    Image.fromarray(blue_feature).save(
+    Image.fromarray(blue_colored).save(
         f"{output_dir}/blue_feature_map.png"
     )
 
